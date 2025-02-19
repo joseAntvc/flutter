@@ -22,8 +22,8 @@ class _HomeViewState extends State<HomeView> { //todo: SingleTicketProviderState
       hintText: "Find things to do",
       hintStyle: TextStyle(color: Color(0xFFB8B8B8), fontSize: 15, fontFamily: "Montserrat-Medium"),
       border: InputBorder.none, //todo: para quitar el borde o una linea fea que se pone abajo
-      prefixIcon: Icon(Icons.search_rounded, color: Color(0xFFB8B8B8),size: 25,),//todo: poner un icono al inicio
-      contentPadding: EdgeInsets.only(top: 12, bottom: 16) 
+      prefixIcon: Image.asset("assets/Search.png", scale: 3),//todo: poner un icono al inicio
+      contentPadding: EdgeInsets.only(top: 16, bottom: 16, left: 16) 
   ),);
 
   @override
@@ -39,7 +39,7 @@ class _HomeViewState extends State<HomeView> { //todo: SingleTicketProviderState
               Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  Icon(Icons.location_on_rounded, color: Color.fromARGB(255, 25, 110, 238), size: 16,),
+                  Image.asset("assets/location-1.png", width: 16,),
                   SizedBox(width: 6,),
                   /*Text("Aspen, USA"),
                   SizedBox(width: 6,),
@@ -126,12 +126,14 @@ class _HomeViewState extends State<HomeView> { //todo: SingleTicketProviderState
               SizedBox(height: 23),
               HeadedView(headed: "Recommended"),
               SizedBox(
-                height: 142,
+                height: 150,
                 child: ListView(
                   scrollDirection: Axis.horizontal,
                   children: [
-                    Padding(padding: EdgeInsets.only(right: 16),child: PackageView()),
-                    PackageView(),
+                    Padding(padding: EdgeInsets.only(right: 18),child: PackageView(image: "Aspen.jpg", name: "Explore Aspen", days: 5, nights: 4,)),
+                    Padding(padding: EdgeInsets.only(right: 18),child: PackageView(image: "Luxurious.jpg", name: "Luxurious Aspen", days: 3, nights: 2,)),
+                    Padding(padding: EdgeInsets.only(right: 18),child: PackageView(image: "Aspen.jpg", name: "Explore Aspen", days: 7, nights: 6,)),
+                    PackageView(image: "Luxurious.jpg", name: "Luxurious Aspen", days: 2, nights: 1),
                   ],
                 ),
               ),

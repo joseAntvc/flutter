@@ -1,6 +1,7 @@
 import 'package:dark_light_button/dark_light_button.dart';
 import 'package:flutter/material.dart';
 import 'package:pmsn2025/utils/global_values.dart';
+import 'package:pmsn2025/utils/theme_settings.dart';
 
 class DashboardScreen extends StatelessWidget {
   const DashboardScreen({super.key});
@@ -12,8 +13,14 @@ class DashboardScreen extends StatelessWidget {
       actions: [
         DarlightButton(
           type: Darlights.DarlightFour,
+          options: DarlightFourOption(),
           onChange: (value){
-            GlobalValues.themeApp.value = value;
+            if(value == ThemeMode.light){ 
+              //todo: Es una condicion para poder hacer el cambio del tema, en esta es un mode lo que da y mejor se maneja con data con la condicion
+              GlobalValues.themeApp.value = ThemeSettings.lightTheme();
+            } else {
+              GlobalValues.themeApp.value = ThemeData.dark();
+            }
           }
         ),
       ],

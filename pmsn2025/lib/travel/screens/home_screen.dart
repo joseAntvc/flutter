@@ -36,7 +36,7 @@ class _HomeScreenState extends State<HomeScreen> {
       bottomNavigationBar: Container(
         decoration: BoxDecoration(//todo: para darle un efecto de blur al bottomNavigation
           boxShadow: [
-            BoxShadow(color: Color(0x0D186FF2), offset: Offset(15, -19), blurRadius: 22, spreadRadius: 0),
+            BoxShadow(color: Color(0x0D186FF2), offset: Offset(0, -15), blurRadius: 22, spreadRadius: 5),
           ],
         ),
         child: ClipRRect(
@@ -45,23 +45,23 @@ class _HomeScreenState extends State<HomeScreen> {
             topRight: Radius.circular(32),
           ),
           child: BottomNavigationBar(
-              backgroundColor: Colors.white,
-              type: BottomNavigationBarType.fixed, //todo: es para dejar fija su posicion, antes como que empujaba los otros botones a los lados
-              items: const <BottomNavigationBarItem>[
-                BottomNavigationBarItem(icon: Icon(Icons.home_filled, size: 30), label: ""),
-                BottomNavigationBarItem(icon: Icon(Icons.airplane_ticket_outlined, size: 30), label: ""),
-                BottomNavigationBarItem(icon: Icon(Icons.favorite_outline, size: 30), label: ""),
-                BottomNavigationBarItem(icon: Icon(Icons.person_outline, size: 30), label: ""),
-              ],
-              currentIndex: selectedIndex,
-              unselectedItemColor: Colors.grey,
-              selectedItemColor: const Color.fromARGB(255, 25, 110, 238),
-              onTap: selectNavigation,
-              showSelectedLabels: false,
-              showUnselectedLabels: false,
-            ),
+            backgroundColor: Colors.white,
+            type: BottomNavigationBarType.fixed, //todo: es para dejar fija su posicion, antes como que empujaba los otros botones a los lados
+            items: <BottomNavigationBarItem>[
+              BottomNavigationBarItem(icon: Image.asset("assets/Home.png", width: 25), activeIcon: Image.asset("assets/HomeA.png", width: 30), label: ""),
+              BottomNavigationBarItem(icon: Image.asset("assets/Ticket.png", width: 25), activeIcon: Image.asset("assets/TicketA.png", width: 32), label: ""),
+              BottomNavigationBarItem(icon: Image.asset("assets/Heart.png", width: 25), activeIcon: Image.asset("assets/HeartA.png", width: 30), label: ""),
+              BottomNavigationBarItem(icon: Image.asset("assets/Profile.png", width: 25), activeIcon: Image.asset("assets/ProfileA.png", width: 30), label: ""),
+            ],
+            currentIndex: selectedIndex,
+            onTap: selectNavigation,
+            unselectedItemColor: Colors.grey,//todo: el color del icon cuando no esta seleccionado
+            selectedItemColor: const Color.fromARGB(255, 25, 110, 238),//todo: para cuando el item esta seleccionado
+            showSelectedLabels: false,//todo: Para no mostrar los labels, el texto debajo del icono
+            showUnselectedLabels: false,//todo: Para no mostrar los labels, el texto debajo del icono
           ),
         ),
+      ),
     );
   }
 }
