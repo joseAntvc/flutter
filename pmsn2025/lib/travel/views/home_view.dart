@@ -65,6 +65,8 @@ class _HomeViewState extends State<HomeView> { //todo: SingleTicketProviderState
                         child: SizedBox(
                           width: 100,//todo: ancho del la lista desplegable
                           child: DropdownButton(
+                            focusColor: Colors.transparent,//todo: para quitar como el sombreado cuando selecciono uno
+                            dropdownColor: Colors.white,//todo: para poder darle un color de fondo a selected
                             isExpanded: true, //todo: ya que arriba le define un ancho, si el texto ocupa mas del ancho se recorta
                             value: location[GlobalValue.isLocation.value],//todo: valor seleccionado
                             icon: Icon(Icons.keyboard_arrow_down, color: Color.fromARGB(255, 25, 110, 238)),//todo: icono de flecha

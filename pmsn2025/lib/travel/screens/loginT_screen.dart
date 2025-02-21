@@ -30,7 +30,7 @@ class LoginTScreen extends StatelessWidget {
             )),
             Positioned(
               width: MediaQuery.of(context).size.width * .8,
-              top: 553,
+              bottom: 48,
               child: Column(
                 children: [
                   Align( //todo: No se alineaba, asi que lo meti en un Align, para acomodarlo a la izquierda
