@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pmsn2025/travel/views/home_view.dart';
+import 'package:pmsn2025/travel/views/meme_view.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -12,9 +13,9 @@ class _HomeScreenState extends State<HomeScreen> {
   int selectedIndex = 0; //todo: indice del bottomNavigation
   static List<Widget> widgetOptions = <Widget>[
     HomeView(),
-    Scaffold(backgroundColor: Colors.white, body: Center(child: Text("Index 1: Tickets"))),
-    Scaffold(backgroundColor: Colors.white, body: Center(child: Text("Index 2: Favoritos"))),
-    Scaffold(backgroundColor: Colors.white, body: Center(child: Text("Index 3: Perfil"))),
+    MemeView(title: "Tickets"),
+    MemeView(title: "Favoritos"),
+    MemeView(title: "Perfil"),
   ];
 
   void selectNavigation(int index) {
