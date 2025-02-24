@@ -21,31 +21,34 @@ class MemeView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        image: DecorationImage(
-          image: AssetImage("assets/Meme.jpg"),
+    return Padding(
+      padding: const EdgeInsets.only(right: 20),
+      child: Container(
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage("assets/Meme.jpg"),
+          ),
         ),
-      ),
-      child: Stack(
-        alignment: Alignment.center,
-        children: [
-          Positioned(
-            top: MediaQuery.of(context).size.height*0.13,
-            child: Text(
-              "Aqui pondría mi pestaña\n$title", 
-              textAlign: TextAlign.center,
-              style: titleStyle
+        child: Stack(
+          alignment: Alignment.center,
+          children: [
+            Positioned(
+              top: MediaQuery.of(context).size.height*0.13,
+              child: Text(
+                "Aqui pondría mi pestaña\n$title", 
+                textAlign: TextAlign.center,
+                style: titleStyle
+              ),
             ),
-          ),
-          Positioned(
-            top: MediaQuery.of(context).size.height*0.45,
-            child: Text(
-              "Si tuviera una!!!", 
-              style: titleStyle
+            Positioned(
+              top: MediaQuery.of(context).size.height*0.45,
+              child: Text(
+                "Si tuviera una!!!", 
+                style: titleStyle
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
