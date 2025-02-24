@@ -31,7 +31,7 @@ class _HomeViewState extends State<HomeView> { //todo: SingleTicketProviderState
     return Column(
       children: [
         ListTile(
-          contentPadding: EdgeInsets.zero,//todo: para quitar el padding
+          contentPadding: EdgeInsets.only(right: 20),//todo: para quitar el padding
           title: Text("Explore", style: TextStyle(fontFamily: "Montserrat-Regular", fontSize: 14, color: Colors.black),),
           subtitle: Text("Aspen", style: TextStyle(fontFamily: "Montserrat-Medium", fontSize: 32, color: Colors.black),),// ! ocupe poner el color black porque sino estaba mas claro
           trailing: Column(
@@ -44,7 +44,7 @@ class _HomeViewState extends State<HomeView> { //todo: SingleTicketProviderState
                   /*Text("Aspen, USA"),
                   SizedBox(width: 6,),
                   Icon(Icons.keyboard_arrow_down, color: Color.fromARGB(255, 25, 110, 238)),*/
-                  //? No puede darle el formato que queria, por eso lo cambie a DropdownButton
+                  //?
                   /*DropdownMenu(
                     initialSelection: location[0],
                     width: 100,
@@ -93,16 +93,19 @@ class _HomeViewState extends State<HomeView> { //todo: SingleTicketProviderState
           ),
         ),
         SizedBox(height: 10),
-        Container(
-          padding: EdgeInsets.only(left: 16),
-          height: 52,
-          width: MediaQuery.of(context).size.width*0.9, //* le doy casi el tamaño completo de la pantalla
-          decoration: BoxDecoration(
-            color: Color.fromARGB(255, 243, 248, 254),
-            borderRadius: BorderRadius.circular(24),
+        Padding(
+          padding: EdgeInsets.only(right: 20),
+          child: Container(
+            padding: EdgeInsets.only(left: 16),
+            height: 52,
+            width: MediaQuery.of(context).size.width*0.9, //* le doy casi el tamaño completo de la pantalla
+            decoration: BoxDecoration(
+              color: Color.fromARGB(255, 243, 248, 254),
+              borderRadius: BorderRadius.circular(24),
+            ),
+            child:
+              txtSearch,
           ),
-          child:
-            txtSearch,
         ),
         SizedBox(height: 32),
         BarhorizontalView(),
@@ -121,7 +124,7 @@ class _HomeViewState extends State<HomeView> { //todo: SingleTicketProviderState
                     Padding(padding: const EdgeInsets.only(right: 28), child: ItemPlace(imageName: "Alley.jpg", name: "Alley Palaca", rating: 4.1, isFavorite: true,)),
                     Padding(padding: const EdgeInsets.only(right: 28), child: ItemPlace(imageName: "Coeurdes.jpg", name: "Coeurdes Alpes", rating: 4.5)),
                     Padding(padding: const EdgeInsets.only(right: 28), child: ItemPlace(imageName: "Alley.jpg", name: "Alley Palaca", rating: 3.9)),
-                    ItemPlace(imageName: "Coeurdes.jpg", name: "Coeurdes Alpes", rating: 4, isFavorite: true,),
+                    Padding(padding: const EdgeInsets.only(right: 20), child: ItemPlace(imageName: "Coeurdes.jpg", name: "Coeurdes Alpes", rating: 4, isFavorite: true,)),
                   ],
                 ),
               ),
@@ -135,7 +138,7 @@ class _HomeViewState extends State<HomeView> { //todo: SingleTicketProviderState
                     Padding(padding: EdgeInsets.only(right: 18),child: PackageView(image: "Aspen.jpg", name: "Explore Aspen", days: 5, nights: 4,)),
                     Padding(padding: EdgeInsets.only(right: 18),child: PackageView(image: "Luxurious.jpg", name: "Luxurious Aspen", days: 3, nights: 2,)),
                     Padding(padding: EdgeInsets.only(right: 18),child: PackageView(image: "Aspen.jpg", name: "Explore Aspen", days: 7, nights: 6,)),
-                    PackageView(image: "Luxurious.jpg", name: "Luxurious Aspen", days: 2, nights: 1),
+                    Padding(padding: EdgeInsets.only(right: 20),child: PackageView(image: "Luxurious.jpg", name: "Luxurious Aspen", days: 2, nights: 1)),
                   ],
                 ),
               ),

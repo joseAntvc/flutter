@@ -31,7 +31,7 @@ class _HomeScreenState extends State<HomeScreen> {
       backgroundColor: Colors.white,// ! Se lo puse porque en el explorar como que aparece de un color rosita tenue
       resizeToAvoidBottomInset: true,//todo: para que no se mueva el bottomNavigation cuando aparece el teclado
       body: Container(
-        margin: const EdgeInsets.only(left: 20, right: 20, top:44),
+        margin: const EdgeInsets.only(left: 20, top:44),
         child: widgetOptions.elementAt(selectedIndex)
       ),
       bottomNavigationBar: Container(
