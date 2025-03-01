@@ -37,12 +37,17 @@ class DashboardScreen extends StatelessWidget {
               accountEmail: Text("21030212@itcelaya.edu.mx"),
             ),
             ListTile(
-              onTap: () {
-                Navigator.pushNamed(context, "/leading");
-              },
+              onTap: () => Navigator.pushNamed(context, "/leading"),
               leading: Icon(Icons.design_services),
-              title: Text("Practica  Figma"),
+              title: Text("Practica Figma"),
               subtitle: Text("Frontend Page"),
+              trailing: Icon(Icons.chevron_right),
+            ),
+            ListTile(
+              onTap: () => Navigator.pushNamed(context, "/todo"),
+              leading: Icon(Icons.task),
+              title: Text("Todo App"),
+              subtitle: Text("Task List"),
               trailing: Icon(Icons.chevron_right),
             ),
           ],
