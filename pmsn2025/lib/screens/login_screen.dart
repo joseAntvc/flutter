@@ -57,7 +57,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 bottom: 20,
                 child: Container(
                   padding: EdgeInsets.all(10),
-                  height: 250,
+                  height: 270,
                   width: MediaQuery.of(context).size.width * .9,
                   decoration: BoxDecoration(
                     color: Colors.white,
@@ -89,7 +89,23 @@ class _LoginScreenState extends State<LoginScreen> {
                           "assets/boton.png",
                           height: 80,
                         ),
-                      )
+                      ),
+                      SizedBox(height: 10),
+                      Divider(
+                        color: Colors.grey, // Color de la línea
+                        thickness: 1, // Grosor de la línea
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        spacing: 5,
+                        children: [
+                          Text("No tienes cuenta?"),
+                          InkWell(
+                            onTap: () => Navigator.pushNamed(context, "/register"),
+                            child: Text("Registarse", style: TextStyle(color: Colors.blue)),
+                          ),
+                        ],
+                      ),
                     ],
                   ),
                 )),

@@ -1,1 +1,0 @@
- /Users/jose/Sites/pmsn2025/pmsn2025/.dart_tool/flutter_build/ba676ae8f3f6daa7a99540a0eb4870eb/native_assets.yaml: 
