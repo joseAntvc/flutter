@@ -1,16 +1,51 @@
-import 'package:dark_light_button/dark_light_button.dart';
+import 'dart:io';
 import 'package:flutter/material.dart';
-import 'package:pmsn2025/utils/global_values.dart';
-import 'package:pmsn2025/utils/theme_settings.dart';
+import 'package:pmsn2025/utils/sesion_values.dart';
+import 'package:pmsn2025/views/theme_view.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-class DashboardScreen extends StatelessWidget {
+class DashboardScreen extends StatefulWidget {
   const DashboardScreen({super.key});
+
+  @override
+  State<DashboardScreen> createState() => _DashboardScreenState();
+}
+
+class _DashboardScreenState extends State<DashboardScreen> {
+  String? userName;
+  String? userEmail;
+  String? userPhoto;
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>(); //Es una variable que permite acceder a los estados de un widget padre
+
+  @override
+  void initState() {
+    super.initState();
+    loadUserData();
+  }
+
+  Future<void> loadUserData() async {
+    final prefs = await SharedPreferences.getInstance();
+    userName = prefs.getString("user_name");
+    userEmail = prefs.getString("user_email");
+    userPhoto = prefs.getString("user_photo");
+    setState(() {});
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Bienvenidos"),
+      key: _scaffoldKey,
+      appBar: AppBar(title: Center(child: Text("Bienvenidos")),
       actions: [
+        IconButton(
+          splashColor: Colors.transparent,
+          icon: Icon(Icons.palette_rounded), // Para poder cambiar el icono
+          onPressed: () {
+            _scaffoldKey.currentState?.openEndDrawer(); //Ocupaba esto porque sino marcaba error porque no estaba inicializado el scaffold
+          },
+        ),
+      ],
+      /*actions: [
         DarlightButton(
           type: Darlights.DarlightFour,
           options: DarlightFourOption(),
@@ -23,36 +58,53 @@ class DashboardScreen extends StatelessWidget {
             }
           }
         ),
-      ],
+      ],*/
       ),
       //drawer: Drawer(),
       drawer: Drawer(
-        child: ListView(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            const UserAccountsDrawerHeader(
-              currentAccountPicture: CircleAvatar(
-                backgroundImage: NetworkImage("https://images.pexels.com/photos/25758/pexels-photo.jpg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2")
-              ),
-              accountName: Text("Jose Antonio Vazquez Cabrera"), 
-              accountEmail: Text("21030212@itcelaya.edu.mx"),
+            Column(
+              children: [
+                UserAccountsDrawerHeader(
+                  currentAccountPicture: CircleAvatar(
+                    backgroundImage: userPhoto != null ? FileImage(File(userPhoto!)) : AssetImage("assets/Profile.png"),
+                  ), 
+                  accountName: Text(userName ?? "Sin nombre de Usuario encontrado", style: Theme.of(context).textTheme.bodyLarge), 
+                  accountEmail: Text(userEmail ?? "Sin correo electrónico encontrado", style: Theme.of(context).textTheme.bodyMedium),
+                ),
+                ListTile(
+                  onTap: () => Navigator.pushNamed(context, "/leading"),
+                  leading: Icon(Icons.design_services),
+                  title: Text("Practica Figma"),
+                  subtitle: Text("Frontend Page"),
+                  trailing: Icon(Icons.chevron_right),
+                ),
+                ListTile(
+                  onTap: () => Navigator.pushNamed(context, "/todo"),
+                  leading: Icon(Icons.task),
+                  title: Text("Todo App"),
+                  subtitle: Text("Task List"),
+                  trailing: Icon(Icons.chevron_right),
+                ),    
+              ],
             ),
             ListTile(
-              onTap: () => Navigator.pushNamed(context, "/leading"),
-              leading: Icon(Icons.design_services),
-              title: Text("Practica Figma"),
-              subtitle: Text("Frontend Page"),
-              trailing: Icon(Icons.chevron_right),
-            ),
-            ListTile(
-              onTap: () => Navigator.pushNamed(context, "/todo"),
-              leading: Icon(Icons.task),
-              title: Text("Todo App"),
-              subtitle: Text("Task List"),
+              tileColor: Colors.red[100],
+              splashColor: Colors.red,
+              onTap: () async {
+                await desactivarSesion();
+                Navigator.pushNamedAndRemoveUntil(context, "/login", (Route route) => false);
+              },
+              leading: Icon(Icons.logout),
+              title: Text("Cerrar sesión"),
               trailing: Icon(Icons.chevron_right),
             ),
           ],
         ),
       ), 
+      endDrawer: ThemeView(),
     );
   }
 }

@@ -19,7 +19,8 @@ class TodoModel {
       titleTodo: map['titleTodo'],
       dscTodo: map['dscTodo'],
       dateTodo: map['dateTodo'],
-      sttTodo: map['sttTodo'],
+      //sttTodo: map['sttTodo'],
+      sttTodo: true,
     );
   }
 }
