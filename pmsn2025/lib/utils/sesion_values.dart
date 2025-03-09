@@ -46,6 +46,9 @@ Future<void> saveFont(String themeFont) async {
 Future<void> loadTheme() async {
   final prefs = await SharedPreferences.getInstance();
   final themeName = prefs.getString('themeName');
+  if (themeName == 'custom') {
+    await loadCustomColors();
+  }
   final themeFont = prefs.getString('themeFont');
   GlobalValues.themeApp.value = themes[themeName] ?? ThemeData.light();
   GlobalValues.fontApp.value = themeFont ?? 'Roboto';
@@ -54,29 +57,22 @@ Future<void> loadTheme() async {
 // Función para guardar los colores del personalizado
 Future<void> saveCustomColors(Color primary, Color surface, Color onSurface, Color appBarBackground, Color appBarForeground) async {
   final prefs = await SharedPreferences.getInstance();
-  await prefs.setInt('customPrimary', primary.value);
-  await prefs.setInt('customSurface', surface.value);
-  await prefs.setInt('customOnSurface', onSurface.value);
-  await prefs.setInt('customAppBarBackground', appBarBackground.value);
-  await prefs.setInt('customAppBarForeground', appBarForeground.value);
+  await prefs.setInt('Primary', primary.value);
+  await prefs.setInt('Surface', surface.value);
+  await prefs.setInt('OnSurface', onSurface.value);
+  await prefs.setInt('AppBarBackground', appBarBackground.value);
+  await prefs.setInt('AppBarForeground', appBarForeground.value);
 }
 
 // Función para cargar los colores del personalizado
-Future<Map<String, Color>> loadCustomColors() async {
+Future<void> loadCustomColors() async {
   final prefs = await SharedPreferences.getInstance();
-  final primary = Color(prefs.getInt('customPrimary') ?? Colors.blue.value);
-  final surface = Color(prefs.getInt('customSurface') ?? Colors.white.value);
-  final onSurface = Color(prefs.getInt('customOnSurface') ?? Colors.black.value);
-  final appBarBackground = Color(prefs.getInt('customAppBarBackground') ?? Colors.blue.value);
-  final appBarForeground = Color(prefs.getInt('customAppBarForeground') ?? Colors.white.value);
+  final primary = Color(prefs.getInt('Primary') ?? Colors.blue.value);
+  final surface = Color(prefs.getInt('Surface') ?? Colors.white.value);
+  final onSurface = Color(prefs.getInt('OnSurface') ?? Colors.black.value);
+  final appBarBackground = Color(prefs.getInt('AppBarBackground') ?? Colors.blue.value);
+  final appBarForeground = Color(prefs.getInt('AppBarForeground') ?? Colors.white.value);
   ThemeSettings.updateCustomTheme(primary, surface, onSurface, appBarBackground, appBarForeground);
-  return {
-    'Botones': primary,
-    'Ventanas': surface,
-    'Texto': onSurface,
-    'Barra principal': appBarBackground,
-    'Texto de la barra': appBarForeground,
-  };
 }
 
 

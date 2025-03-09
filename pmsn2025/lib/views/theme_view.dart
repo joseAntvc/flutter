@@ -4,6 +4,7 @@ import 'package:pmsn2025/utils/global_values.dart';
 import 'package:pmsn2025/utils/sesion_values.dart';
 import 'package:pmsn2025/utils/theme_settings.dart';
 import 'package:pmsn2025/views/font_tile_view.dart';
+import 'package:pmsn2025/views/theme_tile_view.dart';
 
 class ThemeView extends StatefulWidget {
   const ThemeView({super.key});
@@ -15,17 +16,12 @@ class ThemeView extends StatefulWidget {
 class _ThemeViewState extends State<ThemeView> {
 
   Map<String, Color> colors = {
+    'Botones': ThemeSettings.custom().colorScheme.primary,
+    'Ventanas': ThemeSettings.custom().colorScheme.surface,
+    'Texto': ThemeSettings.custom().colorScheme.onSurface,
+    'Barra principal': ThemeSettings.custom().appBarTheme.backgroundColor!,
+    'Texto de la barra': ThemeSettings.custom().appBarTheme.foregroundColor!,
   };
-
-  @override
-  void initState() {
-    super.initState();
-    loadCustomColors().then((c) {
-      setState(() {
-        colors = c;
-      });
-    });
-  }
 
   void pickColor(String key) async {
     Color pickedColor = colors[key]!;
@@ -95,39 +91,9 @@ class _ThemeViewState extends State<ThemeView> {
                     decoration: BoxDecoration(color: Color(0xFF18396a)),
                     child: Text('Selecciona un tema', style: TextStyle(color: Colors.white, fontSize: 30), textAlign: TextAlign.center,),
                   ),
-                  ListTile(
-                    leading: Icon(Icons.light_mode_rounded),
-                    title: Text('Tema oscuro'),
-                    iconColor: themeV == ThemeData.dark() ?  Colors.white : null,
-                    textColor: themeV == ThemeData.dark() ?  Colors.white : null,
-                    tileColor: themeV == ThemeData.dark() ? Colors.blue[300] : null, // Resaltar el tema activo
-                    onTap: themeV == ThemeData.dark() ? null : () {
-                      GlobalValues.themeApp.value = ThemeData.dark();
-                      saveTheme('dark');
-                    },
-                  ),
-                  ListTile(
-                    leading: Icon(Icons.dark_mode_rounded),
-                    title: Text('Tema claro'),
-                    iconColor: themeV == ThemeData.light() ? Colors.white : null,
-                    textColor: themeV == ThemeData.light() ? Colors.white : null,
-                    tileColor: themeV == ThemeData.light() ? Colors.blue[300] : null, // Resaltar el tema activo
-                    onTap: themeV == ThemeData.light() ? null : () {
-                      GlobalValues.themeApp.value = ThemeData.light();
-                      saveTheme('light');
-                    },
-                  ),
-                  ListTile(
-                    leading: Icon(Icons.brightness_6),
-                    title: Text('Personalizado'),
-                    iconColor: themeV == ThemeSettings.custom() ? Colors.white : null,
-                    textColor: themeV == ThemeSettings.custom() ? Colors.white : null,
-                    tileColor: themeV == ThemeSettings.custom() ? Colors.blue[300] : null, // Resaltar el tema activo
-                    onTap: themeV != ThemeData.light() && themeV != ThemeData.dark() ? null : () {
-                      GlobalValues.themeApp.value = ThemeSettings.custom();
-                      saveTheme('custom');
-                    },
-                  ),
+                  ThemeTileView(icon: Icons.light_mode_rounded, themeTitle: 'Tema oscuro', themeName: 'dark', selectedTheme: themeV, themeData: ThemeData.dark()),
+                  ThemeTileView(icon: Icons.dark_mode_rounded, themeTitle: 'Tema claro', themeName: 'light', selectedTheme: themeV, themeData: ThemeData.light()),
+                  ThemeTileView(icon: Icons.brightness_6_rounded, themeTitle: 'Tema personalizado', themeName: 'custom', selectedTheme: themeV, themeData: ThemeSettings.custom()),
                   if(themeV == ThemeSettings.custom())
                     ...colors.entries.map((color) {
                       return Padding(
@@ -148,7 +114,7 @@ class _ThemeViewState extends State<ThemeView> {
                           ),
                         ),
                       );
-                    }).toList(),
+                    }),
                   Divider(height: 30),
                   Container(
                     padding: EdgeInsets.symmetric(horizontal: 20),
