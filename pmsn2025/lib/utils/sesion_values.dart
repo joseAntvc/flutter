@@ -46,9 +46,7 @@ Future<void> saveFont(String themeFont) async {
 Future<void> loadTheme() async {
   final prefs = await SharedPreferences.getInstance();
   final themeName = prefs.getString('themeName');
-  if (themeName == 'custom') {
-    await loadCustomColors();
-  }
+  await loadCustomColors();
   final themeFont = prefs.getString('themeFont');
   GlobalValues.themeApp.value = themes[themeName] ?? ThemeData.light();
   GlobalValues.fontApp.value = themeFont ?? 'Roboto';
